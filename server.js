@@ -1,10 +1,12 @@
-// http module 추출
+const fs = require('fs')
 const http = require('http')
 
-// web server 생성 and 실행
-require('http').createServer(function(req, res){ // request, response
-    res.writeHead(200, {'Content-Type' : 'text/html'})
-    res.end('<h1>Hello World..!</h1>')
+const server = http.createServer(function (req, res){
+    //Read HTML file
+    fs.readFile('./index.html', function(err, data){
+        res.writeHead(200, {'Content-Type' : 'text/html'})
+        res.end(data)
+    })
 }).listen(3001, function(){
-    console.log('Server Running at http://127.0.0.1:3001')
+    console.log('Server Running')
 })
